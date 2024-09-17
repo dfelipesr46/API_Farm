@@ -9,6 +9,9 @@ namespace API_Farm.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<animalType> animalTypes {get; set;}
+        public DbSet<animalType> AnimalTypes {get; set;}
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}  
+        
     }
 }
