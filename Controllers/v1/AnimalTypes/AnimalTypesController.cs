@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API_Farm.Data;
+using API_Farm.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_Farm.Controllers.v1.AnimalTypes
 {
@@ -18,6 +20,26 @@ namespace API_Farm.Controllers.v1.AnimalTypes
             Context = context;
         }
 
-        
+        [HttpGet]
+        public async Task<IActionResult> GetAll(){
+            var AnimalTypes = await Context.AnimalTypes.ToListAsync();
+            if (AnimalTypes.Any() == false)
+            {
+                return NoContent(); 
+            }
+            return Ok(AnimalTypes);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Create(animalType nuevoAnimalType){
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest(ModelState);
+            }
+            Context.AnimalTypes.Add(nuevoAnimalType);
+            await Context.SaveChangesAsync();
+            return Ok("created");
+        }
     }
 }
