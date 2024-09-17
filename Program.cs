@@ -1,3 +1,20 @@
+using DotNetEnv;
+
+Env.Load();
+
+var host = Environment.GetEnvironmentVariable("DB_HOST");
+var nombreBaseDatos = Environment.GetEnvironmentVariable("DB_DATABASE_NAME");
+var nombreUsuario = Environment.GetEnvironmentVariable("DB_USERNAME");
+var puertoBaseDatos = Environment.GetEnvironmentVariable("DB_PORT");
+var contraseñaBaseDatos = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+var connectionString = $"server={host};port={puertoBaseDatos};database={nombreBaseDatos};uid{nombreUsuario};password{contraseñaBaseDatos}";
+
+
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
