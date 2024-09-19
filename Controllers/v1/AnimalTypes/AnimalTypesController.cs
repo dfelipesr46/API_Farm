@@ -41,5 +41,12 @@ namespace API_Farm.Controllers.v1.AnimalTypes
             await Context.SaveChangesAsync();
             return Ok("created");
         }
+
+        [HttpGet("search/keyword")]
+
+        public async Task<IActionResult> SearchByKeword([FromRoute] string keyword)
+        {
+            var animalTypes = await Context.AnimalTypes.Where(p => p.Name.Contains(keyword) || p.Description.Contains(keyword))
+        }
     }
 }
